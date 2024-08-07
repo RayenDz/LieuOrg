@@ -1,7 +1,6 @@
-
-
-
-        const data = [
+// Load data from localStorage or use default data if not available
+let data = JSON.parse(localStorage.getItem('data')) || [
+       
 
  { N: " 1 ", code: " 103003 ", Lieu: " DOCK DERRAG  ", organisme: " CCLS BERROUAGHIA  ", type: " Dock  ", id: " 1 " },
  { N: " 2 ", code: " 103004 ", Lieu: " DOCK K.EL-BOUKHARI  ", organisme: " CCLS BERROUAGHIA  ", type: " Dock  ", id: " 2 " },
@@ -1432,9 +1431,14 @@
  { N: " 1427 ", code: " 0 ", Lieu: "  ", organisme: " AUTRE CLIENTS  ", type: " Agro div  ", id: " 1427 " },
  { N: " 1428 ", code: " 214017 ", Lieu: " ST SEMENCE GHRISS  ", organisme: " CCLS MASCARA  ", type: " Magasin  ", id: " 1428 " }
 
-
-//Addmoredataobjectshereasneeded
 ];
+//Addmoredataobjectshereasneeded
+
+
+// Save data to localStorage
+function saveData() {
+    localStorage.setItem('data', JSON.stringify(data));
+}
 
 function searchData() {
     const searchQuery = document.getElementById('textSearch').value.trim().toLowerCase();
@@ -1454,9 +1458,9 @@ function displayResults(results) {
         results.forEach(result => {
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td>${result.N}</td>
+                <td>${result.lpn}</td>
                 <td>${result.code}</td>
-                <td>${result.Lieu}</td>
+                <td>${result.libelle}</td>
                 <td>${result.organisme}</td>
                 <td>${result.type}</td>
                 <td align='center'>
@@ -1479,14 +1483,15 @@ function editRow(id) {
     const item = data.find(item => item.id == id);
     if (item) {
         const newCode = prompt("Enter new code:", item.code);
-        const newLieu = prompt("Enter new Lieu:", item.Lieu);
+        const newLibelle = prompt("Enter new libelle:", item.libelle);
         const newOrganisme = prompt("Enter new organisme:", item.organisme);
         const newType = prompt("Enter new type:", item.type);
-        if (newCode && newLieu && newOrganisme && newType) {
+        if (newCode && newLibelle && newOrganisme && newType) {
             item.code = newCode;
-            item.Lieu = newLieu;
+            item.libelle = newLibelle;
             item.organisme = newOrganisme;
             item.type = newType;
+            saveData();
             displayResults(data);
         }
     }
@@ -1496,19 +1501,21 @@ function deleteRow(id) {
     const index = data.findIndex(item => item.id == id);
     if (index > -1) {
         data.splice(index, 1);
+        saveData();
         displayResults(data);
     }
 }
 
 function addRow() {
-    const newN = prompt("Enter N:");
+    const newLpn = prompt("Enter LPN:");
     const newCode = prompt("Enter code:");
-    const newLieu = prompt("Enter Lieu:");
+    const newLibelle = prompt("Enter libelle:");
     const newOrganisme = prompt("Enter organisme:");
     const newType = prompt("Enter type:");
-    if (newN && newCode && newLieu && newOrganisme && newType) {
+    if (newLpn && newCode && newLibelle && newOrganisme && newType) {
         const newId = data.length ? Math.max(...data.map(item => item.id)) + 1 : 1;
-        data.push({ N: newN, code: newCode, Lieu: newLieu, organisme: newOrganisme, type: newType, id: newId });
+        data.push({ lpn: newLpn, code: newCode, libelle: newLibelle, organisme: newOrganisme, type: newType, id: newId });
+        saveData();
         displayResults(data);
     }
 }
