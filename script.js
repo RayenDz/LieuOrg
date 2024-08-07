@@ -1432,6 +1432,8 @@ let data = JSON.parse(localStorage.getItem('data')) || [
  { N: " 1428 ", code: " 214017 ", Lieu: " ST SEMENCE GHRISS  ", organisme: " CCLS MASCARA  ", type: " Magasin  ", id: " 1428 " }
 
 ];
+
+// Save data to localStorage
 function saveData() {
     localStorage.setItem('data', JSON.stringify(data));
 }
@@ -1492,3 +1494,37 @@ function editRow(id) {
         }
     }
 }
+
+function deleteRow(id) {
+    const index = data.findIndex(item => item.id == id);
+    if (index > -1) {
+        data.splice(index, 1);
+        saveData();
+        displayResults(data);
+    }
+}
+
+function addRow() {
+    const newN = prompt("Enter N:");
+    const newCode = prompt("Enter code:");
+    const newLieu = prompt("Enter Lieu:");
+    const newOrganisme = prompt("Enter organisme:");
+    const newType = prompt("Enter type:");
+    if (newN && newCode && newLieu && newOrganisme && newType) {
+        const newId = data.length ? Math.max(...data.map(item => item.id)) + 1 : 1;
+        data.push({ N: newN, code: newCode, Lieu: newLieu, organisme: newOrganisme, type: newType, id: newId });
+        saveData();
+        displayResults(data);
+    }
+}
+
+document.getElementById('textSearch').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // Prevent default form submission if inside a form
+        searchData(); // Call the search function
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    displayResults(data);
+});
