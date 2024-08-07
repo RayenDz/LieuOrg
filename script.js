@@ -1483,12 +1483,12 @@ function editRow(id) {
     const item = data.find(item => item.id == id);
     if (item) {
         const newCode = prompt("Enter new code:", item.code);
-        const newLibelle = prompt("Enter new libelle:", item.lieu);
+        const newLieu = prompt("Enter new Lieu:", item.lieu);
         const newOrganisme = prompt("Enter new organisme:", item.organisme);
         const newType = prompt("Enter new type:", item.type);
-        if (newCode && newLibelle && newOrganisme && newType) {
+        if (newCode && newLieu && newOrganisme && newType) {
             item.code = newCode;
-            item.lieu = newLibelle;
+            item.lieu = newLieu;
             item.organisme = newOrganisme;
             item.type = newType;
             saveData();
@@ -1507,14 +1507,14 @@ function deleteRow(id) {
 }
 
 function addRow() {
-    const newLpn = prompt("Enter N:");
+    const newN = prompt("Enter N:");
     const newCode = prompt("Enter code:");
-    const newLibelle = prompt("Enter lieu:");
+    const newLieu = prompt("Enter lieu:");
     const newOrganisme = prompt("Enter organisme:");
     const newType = prompt("Enter type:");
-    if (newLpn && newCode && newLibelle && newOrganisme && newType) {
+    if (newN && newCode && newLieu && newOrganisme && newType) {
         const newId = data.length ? Math.max(...data.map(item => item.id)) + 1 : 1;
-        data.push({ N: newLpn, code: newCode, lieu: newLibelle, organisme: newOrganisme, type: newType, id: newId });
+        data.push({ N: newN, code: newCode, lieu: newLieu, organisme: newOrganisme, type: newType, id: newId });
         saveData();
         displayResults(data);
     }
