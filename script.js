@@ -1432,10 +1432,6 @@ let data = JSON.parse(localStorage.getItem('data')) || [
  { N: " 1428 ", code: " 214017 ", Lieu: " ST SEMENCE GHRISS  ", organisme: " CCLS MASCARA  ", type: " Magasin  ", id: " 1428 " }
 
 ];
-//Addmoredataobjectshereasneeded
-
-
-// Save data to localStorage
 function saveData() {
     localStorage.setItem('data', JSON.stringify(data));
 }
@@ -1460,7 +1456,7 @@ function displayResults(results) {
             row.innerHTML = `
                 <td>${result.N}</td>
                 <td>${result.code}</td>
-                <td>${result.lieu}</td>
+                <td>${result.Lieu}</td>
                 <td>${result.organisme}</td>
                 <td>${result.type}</td>
                 <td align='center'>
@@ -1483,12 +1479,12 @@ function editRow(id) {
     const item = data.find(item => item.id == id);
     if (item) {
         const newCode = prompt("Enter new code:", item.code);
-        const newLieu = prompt("Enter new Lieu:", item.lieu);
+        const newLieu = prompt("Enter new Lieu:", item.Lieu);
         const newOrganisme = prompt("Enter new organisme:", item.organisme);
         const newType = prompt("Enter new type:", item.type);
         if (newCode && newLieu && newOrganisme && newType) {
             item.code = newCode;
-            item.lieu = newLieu;
+            item.Lieu = newLieu;
             item.organisme = newOrganisme;
             item.type = newType;
             saveData();
@@ -1496,37 +1492,3 @@ function editRow(id) {
         }
     }
 }
-
-function deleteRow(id) {
-    const index = data.findIndex(item => item.id == id);
-    if (index > -1) {
-        data.splice(index, 1);
-        saveData();
-        displayResults(data);
-    }
-}
-
-function addRow() {
-    const newN = prompt("Enter N:");
-    const newCode = prompt("Enter code:");
-    const newLieu = prompt("Enter lieu:");
-    const newOrganisme = prompt("Enter organisme:");
-    const newType = prompt("Enter type:");
-    if (newN && newCode && newLieu && newOrganisme && newType) {
-        const newId = data.length ? Math.max(...data.map(item => item.id)) + 1 : 1;
-        data.push({ N: newN, code: newCode, lieu: newLieu, organisme: newOrganisme, type: newType, id: newId });
-        saveData();
-        displayResults(data);
-    }
-}
-
-document.getElementById('textSearch').addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-        event.preventDefault(); // Prevent default form submission if inside a form
-        searchData(); // Call the search function
-    }
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    displayResults(data);
-});
