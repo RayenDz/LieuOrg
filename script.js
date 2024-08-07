@@ -1458,9 +1458,9 @@ function displayResults(results) {
         results.forEach(result => {
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td>${result.lpn}</td>
+                <td>${result.N}</td>
                 <td>${result.code}</td>
-                <td>${result.libelle}</td>
+                <td>${result.lieu}</td>
                 <td>${result.organisme}</td>
                 <td>${result.type}</td>
                 <td align='center'>
@@ -1483,12 +1483,12 @@ function editRow(id) {
     const item = data.find(item => item.id == id);
     if (item) {
         const newCode = prompt("Enter new code:", item.code);
-        const newLibelle = prompt("Enter new libelle:", item.libelle);
+        const newLibelle = prompt("Enter new libelle:", item.lieu);
         const newOrganisme = prompt("Enter new organisme:", item.organisme);
         const newType = prompt("Enter new type:", item.type);
         if (newCode && newLibelle && newOrganisme && newType) {
             item.code = newCode;
-            item.libelle = newLibelle;
+            item.lieu = newLibelle;
             item.organisme = newOrganisme;
             item.type = newType;
             saveData();
@@ -1507,14 +1507,14 @@ function deleteRow(id) {
 }
 
 function addRow() {
-    const newLpn = prompt("Enter LPN:");
+    const newLpn = prompt("Enter N:");
     const newCode = prompt("Enter code:");
-    const newLibelle = prompt("Enter libelle:");
+    const newLibelle = prompt("Enter lieu:");
     const newOrganisme = prompt("Enter organisme:");
     const newType = prompt("Enter type:");
     if (newLpn && newCode && newLibelle && newOrganisme && newType) {
         const newId = data.length ? Math.max(...data.map(item => item.id)) + 1 : 1;
-        data.push({ lpn: newLpn, code: newCode, libelle: newLibelle, organisme: newOrganisme, type: newType, id: newId });
+        data.push({ N: newLpn, code: newCode, lieu: newLibelle, organisme: newOrganisme, type: newType, id: newId });
         saveData();
         displayResults(data);
     }
