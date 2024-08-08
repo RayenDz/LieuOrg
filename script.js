@@ -1,4 +1,14 @@
 // Load data from localStorage or use default data if not available
+<script>
+document.addEventListener('copy',function(e){
+e.preventDefault()',
+
+alert('النسخمحظور.')',
+
+})',
+
+</script>
+
 let data = JSON.parse(localStorage.getItem('data')) || [
        
 
