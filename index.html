@@ -4,75 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rekab Abdelkader</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/icons.css">
     <link rel="stylesheet" href="css/style3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body {
-            background: transparent;
-        }
-        table {
-            width: 95%;
-            margin: 20px auto;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .button {
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-        }
-        .button i {
-            color: #fff;
-        }
-        .search-box {
-            display: flex;
-            justify-content: center;
-            margin: 20px;
-        }
-        .search-box input {
-            border: 2px solid #aaa;
-            border-radius: 4px;
-            padding: 10px;
-            width: 50%;
-            font-size: 16px;
-            background: #276495;
-            color: #fff;
-        }
-        .search-box i {
-            color: #fff;
-            margin-left: -40px; /* Adjust as needed */
-            cursor: pointer;
-        }
-        .actions {
-            text-align: center;
-            margin: 20px;
-        }
-        .actions button {
-            padding: 10px 20px;
-            margin: 5px;
-            cursor: pointer;
-            background-color: #276495;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-        }
-        .actions button:hover {
-            background-color: #1f4b73;
-        }
+        /* ... (your CSS code) ... */
     </style>
-    <caption class='bk-co'>Unité Khemis</caption>
 </head>
 <body>
+    <!-- Your HTML content here -->
     <div class="search-box">
         <input type='text' id='textSearch' name='find' value='' autocomplete='off' placeholder='Recherche...'>
         <i class='fas fa-search' onclick="searchData()" title='Rechercher'></i>
@@ -82,7 +23,7 @@
         <button onclick="addRow()">Ajouter</button>
     </div>
 
-    <table class='tablErp' id='tableERP' align='center'>
+    <table class='tablErp' id='tableERP'>
         <caption class='bk-co'>La programmation se fait par Rekab Abdelkader N° de téléphone 0552 65 60 78</caption>
         <thead>
             <tr>
@@ -100,20 +41,33 @@
         </tbody>
     </table>
 
-    <table style='width:99%; background: #097A89; color: #fff;' align='center'>
-        <tr>
-            <td style='text-align: left; width: 50%;'>
-                <span style='color: #AFC9C4;'>Afficher la page 1 a 48 de 1428 entrees</span>
-            </td>
-            <td style='text-align: right;'>
-                <span class='tbutton' style='color:#fff; text-decoration: none;'> 1 </span>
-                <a href='?strPage=2&user=1&prs=40&find=' class='tbutton' style='color: #fff; text-decoration: none;'> 2 </a>
-                <a href='?strPage=3&user=1&prs=40&find=' class='tbutton' style='color: #fff; text-decoration: none;'> 3 </a>
-                <a href='?strPage=4&user=1&prs=40&find=' class='tbutton' style='color: #fff; text-decoration: none;'> 4 </a>
-                <span><a href='?strPage=2&user=1&prs=40&find=' class='tbutton' style='color: #fff; text-decoration: none;'>>></a></span>
-            </td>
-        </tr>
-    </table>
-    <script src="script.js"></script>
+    <div class="pagination">
+        <span>Afficher la page 1 a 48 de 1428 entrees</span>
+        <span>
+            <a href='?strPage=2&user=1&prs=40&find='>2</a>
+            <a href='?strPage=3&user=1&prs=40&find='>3</a>
+            <a href='?strPage=4&user=1&prs=40&find='>4</a>
+            <a href='?strPage=2&user=1&prs=40&find='>>></a>
+        </span>
+    </div>
+
+    <script>
+        function searchData() {
+            var query = document.getElementById('textSearch').value;
+            console.log('Searching for: ' + query);
+        }
+
+        function addRow() {
+            var table = document.getElementById('tableBody');
+            var row = table.insertRow();
+            row.insertCell(0).innerHTML = "New";
+            row.insertCell(1).innerHTML = "Code";
+            row.insertCell(2).innerHTML = "Location";
+            row.insertCell(3).innerHTML = "Organization";
+            row.insertCell(4).innerHTML = "Type";
+            row.insertCell(5).innerHTML = "<button>Edit</button>";
+            row.insertCell(6).innerHTML = "<button>Delete</button>";
+        }
+    </script>
 </body>
 </html>
