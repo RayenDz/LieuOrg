@@ -1526,3 +1526,14 @@ document.getElementById('textSearch').addEventListener('keydown', function(event
 document.addEventListener('DOMContentLoaded', function() {
     displayResults(data);
 });
+  document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+document.onkeydown = function(e) {
+        if (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'c' || e.key === 'p')) {
+            e.preventDefault();
+        }
+    };
+   window.onload = function() {
+        alert('هذا الموقع مخصص فقط للاستخدام الشخصي، يرجى عدم محاولة نسخ أو عرض الكود المصدر.......  يرجى التواصل مع ركاب عبالقادر رقم الهاتف 78 60 65 0552');
+    };
