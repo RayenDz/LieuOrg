@@ -1,9 +1,6 @@
 // Load data from localStorage or use default data if not available
 
-
 let data = JSON.parse(localStorage.getItem('data')) || [
-       
-
  { N: " 1 ", code: " 103003 ", Lieu: " DOCK DERRAG  ", organisme: " CCLS BERROUAGHIA  ", type: " Dock  ", id: " 1 " },
  { N: " 2 ", code: " 103004 ", Lieu: " DOCK K.EL-BOUKHARI  ", organisme: " CCLS BERROUAGHIA  ", type: " Dock  ", id: " 2 " },
  { N: " 3 ", code: " 103005 ", Lieu: " DOCK MOUDJBOUR  ", organisme: " CCLS BERROUAGHIA  ", type: " Dock  ", id: " 3 " },
@@ -1434,101 +1431,100 @@ let data = JSON.parse(localStorage.getItem('data')) || [
  { N: " 1428 ", code: " 214017 ", Lieu: " ST SEMENCE GHRISS  ", organisme: " CCLS MASCARA  ", type: " Magasin  ", id: " 1428 " }
 
 ];
-
-// Save data to localStorage
-function saveData() {
-    localStorage.setItem('data', JSON.stringify(data));
-}
-
-function searchData() {
-    const searchQuery = document.getElementById('textSearch').value.trim().toLowerCase();
-    const filteredResults = data.filter(item => {
-        return Object.values(item).some(value => value.toLowerCase().includes(searchQuery));
-    });
-    displayResults(filteredResults);
-}
-
-function displayResults(results) {
-    const tableBody = document.getElementById('tableBody');
-    tableBody.innerHTML = ''; // Clear previous results
-
-    if (results.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="7">Aucune correspondance trouvee.</td></tr>';
-    } else {
-        results.forEach(result => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${result.N}</td>
-                <td>${result.code}</td>
-                <td>${result.Lieu}</td>
-                <td>${result.organisme}</td>
-                <td>${result.type}</td>
-                <td align='center'>
-                    <button onclick="editRow(${result.id})" style='background: #2baf6d; color: #fff;'>
-                        <i class='fas fa-edit'></i>
-                    </button>
-                </td>
-                <td align='center'>
-                    <button onclick="deleteRow(${result.id})" style='background: #af2b37; color: #fff;'>
-                        <i class='fas fa-trash'></i>
-                    </button>
-                </td>
-            `;
-            tableBody.appendChild(row);
-        });
-    }
-}
-
-function editRow(id) {
-    const item = data.find(item => item.id == id);
-    if (item) {
-        const newCode = prompt("Enter new code:", item.code);
-        const newLieu = prompt("Enter new Lieu:", item.Lieu);
-        const newOrganisme = prompt("Enter new organisme:", item.organisme);
-        const newType = prompt("Enter new type:", item.type);
-        if (newCode && newLieu && newOrganisme && newType) {
-            item.code = newCode;
-            item.Lieu = newLieu;
-            item.organisme = newOrganisme;
-            item.type = newType;
-            saveData();
-            displayResults(data);
+        // Save data to localStorage
+        function saveData() {
+            localStorage.setItem('data', JSON.stringify(data));
         }
-    }
-}
 
-function deleteRow(id) {
-    const index = data.findIndex(item => item.id == id);
-    if (index > -1) {
-        data.splice(index, 1);
-        saveData();
-        displayResults(data);
-    }
-}
+        function searchData() {
+            const searchQuery = document.getElementById('textSearch').value.trim().toLowerCase();
+            const filteredResults = data.filter(item => {
+                return Object.values(item).some(value => value.toLowerCase().includes(searchQuery));
+            });
+            displayResults(filteredResults);
+        }
 
-function addRow() {
-    const newN = prompt("Enter N:");
-    const newCode = prompt("Enter code:");
-    const newLieu = prompt("Enter Lieu:");
-    const newOrganisme = prompt("Enter organisme:");
-    const newType = prompt("Enter type:");
-    if (newN && newCode && newLieu && newOrganisme && newType) {
-        const newId = data.length ? Math.max(...data.map(item => item.id)) + 1 : 1;
-        data.push({ N: newN, code: newCode, Lieu: newLieu, organisme: newOrganisme, type: newType, id: newId });
-        saveData();
-        displayResults(data);
-    }
-}
+        function displayResults(results) {
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = ''; // Clear previous results
 
-document.getElementById('textSearch').addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-        event.preventDefault(); // Prevent default form submission if inside a form
-        searchData(); // Call the search function
-    }
-});
+            if (results.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="7">Aucune correspondance trouvee.</td></tr>';
+            } else {
+                results.forEach(result => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${result.N}</td>
+                        <td>${result.code}</td>
+                        <td>${result.Lieu}</td>
+                        <td>${result.organisme}</td>
+                        <td>${result.type}</td>
+                        <td align='center'>
+                            <button onclick="editRow(${result.id})" style='background: #2baf6d; color: #fff;'>
+                                <i class='fas fa-edit'></i>
+                            </button>
+                        </td>
+                        <td align='center'>
+                            <button onclick="deleteRow(${result.id})" style='background: #af2b37; color: #fff;'>
+                                <i class='fas fa-trash'></i>
+                            </button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+        }
 
-document.addEventListener('DOMContentLoaded', function() {
-    displayResults(data);
-});
+        function editRow(id) {
+            const item = data.find(item => item.id == id);
+            if (item) {
+                const newCode = prompt("Enter new code:", item.code);
+                const newLieu = prompt("Enter new Lieu:", item.Lieu);
+                const newOrganisme = prompt("Enter new organisme:", item.organisme);
+                const newType = prompt("Enter new type:", item.type);
+                if (newCode && newLieu && newOrganisme && newType) {
+                    item.code = newCode;
+                    item.Lieu = newLieu;
+                    item.organisme = newOrganisme;
+                    item.type = newType;
+                    saveData();
+                    displayResults(data);
+                }
+            }
+        }
 
+        function deleteRow(id) {
+            const index = data.findIndex(item => item.id == id);
+            if (index > -1) {
+                data.splice(index, 1);
+                saveData();
+                displayResults(data);
+            }
+        }
+
+        function addRow() {
+            const newN = prompt("Enter N:");
+            const newCode = prompt("Enter code:");
+            const newLieu = prompt("Enter Lieu:");
+            const newOrganisme = prompt("Enter organisme:");
+            const newType = prompt("Enter type:");
+            if (newN && newCode && newLieu && newOrganisme && newType) {
+                const newId = data.length ? Math.max(...data.map(item => item.id)) + 1 : 1;
+                data.push({ N: newN, code: newCode, Lieu: newLieu, organisme: newOrganisme, type: newType, id: newId });
+                saveData();
+                displayResults(data);
+            }
+        }
+
+        document.getElementById('textSearch').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent default form submission if inside a form
+                searchData(); // Call the search function
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            displayResults(data);
+        });
+    
 
