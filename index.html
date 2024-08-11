@@ -4,10 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rekab Abdelkader</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/icons.css">
-    <link rel="stylesheet" href="css/style3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             background: transparent;
@@ -141,8 +137,8 @@
                 <th>Lieu</th>
                 <th>Organisme</th>
                 <th>Type</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th>Modifier</th>
+                <th>Supprimer</th>
             </tr>
         </thead>
         <tbody class="tbody" id="tableBody">
@@ -150,15 +146,8 @@
         </tbody>
     </table>
 
-    <div class="pagination">
-        <span>Afficher la page 1 a 48 de 1428 entrees</span>
-        <span>
-            <a href="?strPage=1&user=1&prs=40&find=" class="tbutton" style="color: #fff;">1</a>
-            <a href="?strPage=2&user=1&prs=40&find=" class="tbutton" style="color: #fff;">2</a>
-            <a href="?strPage=3&user=1&prs=40&find=" class="tbutton" style="color: #fff;">3</a>
-            <a href="?strPage=4&user=1&prs=40&find=" class="tbutton" style="color: #fff;">4</a>
-            <a href="?strPage=2&user=1&prs=40&find=" class="tbutton" style="color: #fff;">>></a>
-        </span>
+    <div class="pagination" id="pagination">
+        <!-- Pagination will be inserted here by JavaScript -->
     </div>
 
     <script src="script.js"></script>
