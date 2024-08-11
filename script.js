@@ -1430,7 +1430,7 @@ let data = JSON.parse(localStorage.getItem('data')) || [
     { N: " 1428 ", code: " 214017 ", Lieu: " ST SEMENCE GHRISS  ", organisme: " CCLS MASCARA  ", type: " Magasin  ", id: " 1428 " }
 ];
 
-const rowsPerPage = 20;
+const rowsPerPage = 100;
 let currentPage = 1;
 
 function saveData() {
