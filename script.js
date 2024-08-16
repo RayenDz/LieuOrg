@@ -1565,12 +1565,3 @@ document.addEventListener("DOMContentLoaded", function() {
         window.location.href = 'https://rayendz.github.io/DistanceLieu/';
     });
 });
-function searchData() {
-    const searchQuery = document.getElementById('textSearch').value.trim().toLowerCase();
-    console.log("Search Query:", searchQuery); // Debugging line
-    const filteredResults = data.filter(item => {
-        return Object.values(item).some(value => value.toLowerCase().includes(searchQuery));
-    });
-    console.log("Filtered Results:", filteredResults); // Debugging line
-    displayTable(filteredResults, currentPage);
-}
